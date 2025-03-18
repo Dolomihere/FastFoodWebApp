@@ -1,0 +1,155 @@
+﻿@model List<FoodItemDTO>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="container">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 rounded-top-0 shadow-lg" style="background-image: url('@Url.Content("~/images/burgers.jpg")'); background-repeat: no-repeat; background-size: cover; background-position: center; height: 70vh;">
+    </div>
+</div>
+
+<div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Khám phá những món ăn</h2>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+
+        <div class="col">
+            <a href="" style="text-decoration: none;">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('@Url.Content("~/images/strawberry-dessert.jpg")');">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to multiple lines</h3>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+
+                            </li>
+                            <li class="d-flex align-items-center me-3">
+                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill" /></svg>
+                                <small>Khoai chiên</small>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3" /></svg>
+                                <small></small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="" style="text-decoration: none;">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('@Url.Content("~/images/sandwich.jpg")'); background-repeat: no-repeat; background-size: cover; background-position: center; height: 70vh;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h3>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+
+                            </li>
+                            <li class="d-flex align-items-center me-3">
+                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill" /></svg>
+                                <small>Tráng miệng</small>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3" /></svg>
+                                <small></small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col">
+            <a href="" style="text-decoration: none;">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('@Url.Content("~/images/bananas.jpg")'); background-repeat: no-repeat; background-size: cover; background-position: center; height: 70vh;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h3>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+
+                            </li>
+                            <li class="d-flex align-items-center me-3">
+                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill" /></svg>
+                                <small>Tráng miệng</small>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3" /></svg>
+                                <small></small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="container my-5">
+        <div class="row featurette">
+
+            <div class="col-md-6">
+                <img src="~/images/burger.jpg" alt="Large Picture" class="img-fluid h-100" style="max-height: 100%; width: 100%; object-fit: cover;">
+            </div>
+
+            <div class="col-md-6">
+                <div class="row g-4">
+
+                    @if (Model != null)
+                    {
+                        var getItem = Model.Reverse<FoodItemDTO>().Take(4);
+
+                        foreach (FoodItemDTO item in getItem)
+                        {
+                            <div class="col-6">
+                                <div class="card">
+                                    <img src="~/images/@item.ImagePath" class="card-img-top" alt="Product">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@item.Name</h5>
+                                        <p class="card-text">Giá: @item.Price</p>
+                                        <a href="#" class="btn btn-primary">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center mb-4 mt-4">Sản phẩm của chúng tôi</h2>
+    <hr>
+
+    <div class="container my-5">
+
+        <div class="row">
+
+            @if (Model != null)
+            {
+                var getItem = Model.Take(6);
+
+                foreach (FoodItemDTO item in getItem)
+                {
+                    <div class="col-6 col-md-2 mb-3">
+                        <div class="card h-100 product-card">
+                            <img src="~/images/@item.ImagePath" class="card-img-top" alt="Product">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Name</h5>
+                                <p class="card-text">Giá: @item.Price</p>
+                                <a href="#" class="btn btn-primary">Thêm vào giỏ</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/fooditem.js"></script>

@@ -1,0 +1,106 @@
+﻿@model List<FoodItemDTO>
+
+@{
+    ViewData["Title"] = "Món ăn";
+}
+
+<div class="row g-5 p-3">
+    <div class="col-md-4">
+        <div class="position-sticky" style="top: 2rem;">
+            <h3 class="pb-4 mb-4 fst-italic border-bottom">Loại đồ ăn</h3>
+            <!-- Button to toggle collapse on smaller screens -->
+            <button class="btn btn-info d-md-none w-100 " type="button" data-bs-toggle="collapse" data-bs-target="#foodList" aria-expanded="false" aria-controls="foodList">
+                Hiện danh sách
+            </button>
+            <!-- Collapsible content -->
+            <ol class="list-unstyled collapse d-md-block" id="foodList">
+                <li><a href="#">Burger</a></li>
+                <li><a href="#">Khoai chiên</a></li>
+                <li><a href="#">Ăn vặt</a></li>
+                <li><a href="#">Đồ uống</a></li>
+                <li><a href="#">Khác</a></li>
+            </ol>
+
+            <h4 class="fst-italic mt-3">Khám phá thêm</h4>
+            <ul class="list-unstyled">
+                <li>
+                    <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                        <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
+                        <div class="col-lg-8">
+                            <h6 class="mb-0">Example blog post title</h6>
+                            <small class="text-body-secondary">January 15, 2024</small>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                        <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
+                        <div class="col-lg-8">
+                            <h6 class="mb-0">This is another blog post title</h6>
+                            <small class="text-body-secondary">January 14, 2024</small>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                        <svg class="bd-placeholder-img" width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777" /></svg>
+                        <div class="col-lg-8">
+                            <h6 class="mb-0">Longer blog post title: This one has multiple lines!</h6>
+                            <small class="text-body-secondary">January 13, 2024</small>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h3 class="pb-4 mb-4 fst-italic border-bottom">
+            Thực đơn
+        </h3>
+
+        <article class="blog-post">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                
+                @if (Model != null)
+                {
+                    if (Model.Count > 0)
+                    {
+                        foreach (FoodItemDTO item in Model)
+                        {
+                            <div class="col">
+                                <div class="card shadow-sm border-0">
+                                    <a href="#">
+                                        <img src="~/images/@item.ImagePath" alt="Food item" class="card-img-top" />
+                                    </a>
+                                    <div class="card-body" id="item-@item.FoodItemId">
+                                        <p class="card-text">@item.Name</p>
+                                        <input id="itemName-@item.FoodItemId" value="@item.Name" hidden/>
+                                        <input id="itemId-@item.FoodItemId" value="@item.FoodItemId" hidden />
+                                        <input id="itemImage-@item.FoodItemId" value="@item.ImagePath" hidden />
+                                        <input id="itemPrice-@item.FoodItemId" value="@item.Price" hidden />
+                                        <input id="itemType-@item.FoodItemId" value="@item.Category" hidden />
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button id="my-btn-@item.FoodItemId" type="button" class="btn btn-sm btn-outline-secondary">Thêm vào giỏ</button>
+                                            </div>
+                                            <small class="text-body-secondary">@item.Price đ</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+
+            </div>
+
+        </article>
+		
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/fooditem.js"></script>

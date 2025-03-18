@@ -1,0 +1,86 @@
+﻿@model List<FoodItem>
+
+@{
+    Layout = "_ManageLayout";
+    ViewData["Title"] = "Quản lí món ăn";
+}
+
+<div class="container album py-2 bg-body-tertiary position-relative">
+    <div class="container" id="replace">
+
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a href="#" class="navbar-brand">Thêm sản phẩm</a>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Tìm</button>
+                </form>
+            </div>
+        </nav>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+
+            @if (Model != null)
+            {
+                if (Model.Count > 0)
+                {
+                    foreach (FoodItem item in Model)
+                    {
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img src="~/images/@item.ImagePath" alt="Food item" class="card-img-top" />
+                                <div class="card-body">
+                                    <p class="card-text">@item.Name</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Xem</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Sửa</button>
+                                        </div>
+                                        <small class="text-body-secondary">@item.Price đ</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+ 
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="userModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="control-label">Id người dùng</label>
+                        <input id="UserId" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Tên người dùng</label>
+                        <input id="UserName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input id="Email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Mật Khẩu</label>
+                        <input id="Password" class="form-control" />
+                        <p id="showError" class="form-text" hidden>Mật khẩu chưa đủ mạnh</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="save" onclick="">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

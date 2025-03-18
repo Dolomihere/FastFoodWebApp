@@ -1,0 +1,57 @@
+﻿@model List<CartItemDTO>
+
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .giant-table {
+        width: 100%;
+        min-width: 500px;
+        min-height: 500px;
+        background-color: #f0f0f0;
+        border: 2px solid #ccc;
+    }
+
+    .giant-table td, .giant-table th {
+        padding: 20px;
+    }
+</style>
+
+<div class="container p-4 bg-body">
+    <table class="table giant-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr id="@item.FoodItemId">
+                        <td>
+                            <img src="~/images/@item.FoodItemImage" class="m-0" style="width: 200px; height: 100px;" />
+                        </td>
+                        <td>@item.FoodItemName</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>
+                        <td>@item.Total</td>
+                        <td>
+                            <a href="#" onclick="PasteToForm('')" data-bs-toggle="modal" data-bs-target="#productModal">Sửa</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                
+            }
+        </tbody>
+    </table>
+</div>
